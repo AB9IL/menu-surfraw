@@ -7,7 +7,7 @@
 # it in your browser of choice.
 
 # Edit here to change what browser you open links in
-browser="/usr/bin/firefox"
+browser="x-www-browser"
 
 usage() {
     echo "Usage: $0 [OPTIONS] [ELVIS [SEARCHTERM]]
@@ -31,7 +31,7 @@ esac
 
 # Path to menu application
 if [[ -n $(command -v rofi) ]]; then
-	menu="$(command -v rofi) -dmenu"
+	menu="$(command -v rofi) -theme "glue_pro_blue" -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -"
 elif [[ -n $(command -v dmenu) ]]; then
 	menu="$(command -v dmenu)"
 else
@@ -47,7 +47,7 @@ answerB=$(echo "${@:2}")
 # the search in surfraw
 if [[ -z "$answerA" ]]; then
 	action=$(surfraw -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' |
-	        $menu -p "web: ")
+	        $menu -dmenu -mesg ">>> Tab = Autocomplete" -i -p "search site: ")
 elif [[ -z "$answerB" ]]; then
 	action=$(echo "" | $menu -p "$answerA ")
 else
