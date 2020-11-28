@@ -6,8 +6,9 @@
 # available elvi to use in surfraw then get the search term afterwards and open
 # it in your browser of choice.
 
-# Edit here to change what browser you open links in
+# Edit here to change web browser and theme
 browser="x-www-browser"
+theme="glue_pro_blue"
 
 usage() {
     echo "Usage: $0 [OPTIONS] [ELVIS [SEARCHTERM]]
@@ -31,7 +32,7 @@ esac
 
 # Path to menu application
 if [[ -n $(command -v rofi) ]]; then
-	menu="$(command -v rofi) -theme "glue_pro_blue" -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -"
+	menu="$(command -v rofi) -theme $theme -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -"
 elif [[ -n $(command -v dmenu) ]]; then
 	menu="$(command -v dmenu)"
 else
