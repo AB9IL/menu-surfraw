@@ -8,7 +8,7 @@
 
 # Edit here to change web browser and theme
 browser="x-www-browser"
-theme="glue_pro_blue"
+theme="Arc-Dark"
 
 usage() {
     echo "Usage: $0 [OPTIONS] [ELVIS [SEARCHTERM]]
@@ -32,7 +32,7 @@ esac
 
 # Path to menu application
 if [[ -n $(command -v rofi) ]]; then
-	menu="$(command -v rofi) -theme $theme -kb-row-select "Tab" -kb-row-tab "Control+space" -dmenu -"
+	menu="rofi -dmenu -"
 elif [[ -n $(command -v dmenu) ]]; then
 	menu="$(command -v dmenu)"
 else
@@ -48,9 +48,9 @@ answerB=$(echo "${@:2}")
 # the search in surfraw
 if [[ -z "$answerA" ]]; then
 	action=$(surfraw -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' |
-	        $menu -dmenu -mesg ">>> Tab = Autocomplete" -i -p "search site: ")
+	        $menu -dmenu -mesg ">>> Tab = Autocomplete" -i -p "Search site ")
 elif [[ -z "$answerB" ]]; then
-	action=$(echo "" | $menu -p "$answerA ")
+    action=$(echo "" | $menu -p "[$answerA] Enter keyword")
 else
 	surfraw -browser=$browser $answerA
 fi
